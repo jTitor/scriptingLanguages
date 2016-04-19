@@ -1,0 +1,7 @@
+To set up the project, you do the following:
+	* Import the SQL tables
+	* Change database logins
+	
+First is importing the tables. docs/ contains all of the .SQL files needed to recreate the database; import these via phpMyAdmin or your admin tool of choice.
+
+Second is the database logins; in azimuth/forms/courses.php and azimuth/forms/student.php, set $servername to the database server's name (the default will use the database the school gives you for Userpages), $username to the database username, $password to the database password, and $dbName to the database name. Suddenly everything works! 

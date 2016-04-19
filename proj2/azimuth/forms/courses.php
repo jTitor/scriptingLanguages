@@ -15,8 +15,9 @@ $_SESSION["courses_valid"] = False;
 
 //Initialize Database Access
 $servername = "studentdb-maria.gl.umbc.edu"; 
-$username = "XX"; 
-$password = "catdogdonutman27"; 
+$username = "username_here"; 
+$password = "password_here"; 
+$dbName = "db_here";
 $link = mysql_connect($servername, $username, $password); 
 
 //Database Connect Error
@@ -25,9 +26,9 @@ if (!$link) {
 }
 
 //Table Select Error
-$db_selected = mysql_select_db('XX', $link);
+$db_selected = mysql_select_db($dbName, $link);
 if (!$db_selected) {
-  die ('Can\'t use XX : ' . mysql_error());
+  die ('Can\'t use database \"' . $dbName . '\" : ' . mysql_error());
 }
 
 /*Output Section - HTML Output OK********************************************/ 

@@ -8,9 +8,10 @@ $ROOT = '../';
 session_start();
 
 $servername = "studentdb-maria.gl.umbc.edu";
-$username = "XX";
-$password = "catdogdonutman27";
+$username = "username_here";
+$password = "password_here";
 $stuidCopy = $_SESSION['stuid'];
+$dbName = "db_here";
 
 // Set up link to database server
 $link = mysql_connect($servername, $username, $password);
@@ -19,9 +20,9 @@ if (!$link) {
 }
 
 // Select proper database
-$db_selected = mysql_select_db('XX', $link);
+$db_selected = mysql_select_db($dbName, $link);
 if (!$db_selected) {
-  die ('Can\'t use XX : ' . mysql_error());
+  die ('Can\'t use database \"' . $dbName . '\" : ' . mysql_error());
 }
 
 
