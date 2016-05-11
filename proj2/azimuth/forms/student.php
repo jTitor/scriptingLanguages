@@ -128,26 +128,185 @@ include('html/student.html');
     <fieldset>
       <legend><strong>UMBC Student Information</strong></legend>
       <label for="name">Name</label><br />
-      <input type="text" name="name" value="<?php echo $name;?>" 
+      <input type="text" name="name" id="name" value="<?php echo $name;?>" 
   maxlength="70" required>
-      <div class="error"><?php echo $nameErr;?></div><br />
+      <div id="nameErr"></div><br />
       <label for="stuid">Campus ID</label><br />
-      <input type="text" name="stuid" value="<?php echo $stuid;?>" 
+      <input type="text" name="stuid" id="stuid" value="<?php echo $stuid;?>" 
   maxlength="7" size="10" required>
-      <div class="error"><?php echo $stuidErr;?></div><br />
+      <div id="stuidErr"></div><br />
       <label for="email">UMBC Email</label><br />
-      <input type="email" name="email" value="<?php echo $email;?>" 
+      <input type="email" name="email" id="email" value="<?php echo $email;?>" 
   maxlegnth="40" required>
-      <div class="error"><?php echo $emailErr;?></div><br />
+      <div id="emailErr"></div><br />
       <label for="degree">Degree</label><br />
-      <select name="degree" required>
+      <select name="degree" id="degree"required>
         <option value="" disabled selected value></option>
         <option value="cmsc">Computer Science</option>
-      </select><div class="error"><?php echo $degreeErr;?></div><br />
-      <input type="submit" value="Submit">
+      </select><div id="degreeErr"></div><br />
+      <input type="submit" id="submit" value="Submit">
     </fieldset>
   </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script>
+
+//name is valid
+var nIsValid = true; 
+
+//campus id is valid
+var cIsValid = true;
+
+//email is valid
+var eIsValid = true;
+
+//degree is valid
+var dIsValid = true;
+
+
+//validate name
+$("#name").change(function () {
+  var nameErr;
+  if ($(this).val() == "") {
+    nameErr = "Name is Required";
+    nIsValid = false;
+  }
+  else
+  {
+    if( !(/^[a-zA-Z ]*$/.test($(this).val())) )
+    {
+      nameErr = "Letters and spaces only";
+      nIsValid = false;
+    }
+    else
+    {
+    	nIsValid = true;
+    	$("#nameErr").html("");
+    }
+  }
+  if(!nIsValid)
+  {
+  	$("#nameErr").css("color", "red"); 
+    $("#nameErr").html(nameErr);
+  }
+
+  if( !(nIsValid && cIsValid && eIsValid && dIsValid) )
+  {
+  	$("#submit").prop("disabled",true);
+  }
+  else
+  {
+  	$("#submit").prop("disabled",false);
+  }
+}).change();
+
+
+//validate campus id
+$("#stuid").change(function () {
+  var stuidErr;
+  if ($(this).val() == "") {
+    stuidErr = "Campus ID is Required";
+    cIsValid = false;
+  }
+  else
+  {
+    if( !(/^[a-zA-Z]{2}[0-9]{5}$/.test($(this).val())) )
+    {
+      stuidErr = "Invalid Campus ID format";
+      cIsValid = false;
+    }
+    else
+    {
+    	cIsValid = true;
+    	$("#stuidErr").html("");
+    }
+  }
+  if(!cIsValid)
+  {
+  	$("#stuidErr").css("color", "red"); 
+    $("#stuidErr").html(stuidErr);
+  }
+
+  if( !(nIsValid && cIsValid && eIsValid && dIsValid) )
+  {
+  	$("#submit").prop("disabled",true);
+  }
+  else
+  {
+  	$("#submit").prop("disabled",false);
+  }
+}).change();
+
+
+//validate email
+$("#email").change(function () {
+  var emailErr;
+  if ($(this).val() == "") {
+    emailErr = "UMBC Email is Required";
+    eIsValid = false;
+  }
+  else
+  {
+    if( !(/^[a-z0-9]{3,}@umbc\.edu$/.test($(this).val())) )
+    {
+      emailErr = "Invalid UMBC Email format";
+      eIsValid = false;
+    }
+    else
+    {
+    	eIsValid = true;
+    	$("#emailErr").html("");
+    }
+  }
+  if(!eIsValid)
+  {
+  	$("#emailErr").css("color", "red"); 
+    $("#emailErr").html(emailErr);
+  }
+
+  if( !(nIsValid && cIsValid && eIsValid && dIsValid) )
+  {
+  	$("#submit").prop("disabled",true);
+  }
+  else
+  {
+  	$("#submit").prop("disabled",false);
+  }
+}).change();
+
+
+//validate degree
+$("#degree").change(function () {
+  var degreeErr;
+  if ( $(this).val() != "cmsc") {
+    degreeErr = "Degree is Required";
+    dIsValid = false;
+  }
+  else
+  { 
+    dIsValid = true;
+    $("#degreeErr").html("");
+  }
+  if(!dIsValid)
+  {
+  	$("#degreeErr").css("color", "red"); 
+    $("#degreeErr").html(degreeErr);
+  }
+
+  if( !(nIsValid && cIsValid && eIsValid && dIsValid) )
+  {
+  	$("#submit").prop("disabled",true);
+  }
+  else
+  {
+  	$("#submit").prop("disabled",false);
+  }
+
+}).change();
+
+</script>
 
 <?php
 
